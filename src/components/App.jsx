@@ -8,7 +8,6 @@ export default function App() {
   const [contacts, setContats] = useState(() =>
     JSON.parse(localStorage.getItem('contacts') ?? '')
   );
-
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function App() {
   }
 
   function handleFilterChange(e) {
-    setFilter({ filter: e.currentTarget.value });
+    setFilter(e.currentTarget.value);
   }
 
   function handleSubmitForm(newContact) {
@@ -39,9 +38,9 @@ export default function App() {
     setContats(s => [...s, newContact]);
   }
 
-  const filteredContacts = [...contacts].filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLocaleLowerCase())
-  );
+  const filteredContacts = [...contacts].filter(contact => {
+    return contact.name.toLowerCase().includes(filter.toLowerCase());
+  });
 
   return (
     <div>
